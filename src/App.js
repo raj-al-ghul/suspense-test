@@ -13,13 +13,19 @@ const restaurantListResource = unstable_createResource(() => {
   });
 });
 
+const loadStuff = () =>{
+  return restaurantListResource.read();
+}
+
 const RestaurantList = () => {
   // if no restaurants are found in the cache, the suspense will throw a promise
-  const restaurants = restaurantListResource.read();
+  // const restaurants = restaurantListResource.read();
+  const restaurants = loadStuff();
   // this line will have to wait until that promise resolves
   return (
     <article>
       <h2 className="f3 fw4 pa3 mv0">Restaurant List</h2>
+      <span onClick={loadStuff}>Click me</span>
       <div className="cf pa2">{JSON.stringify(restaurants)}</div>
     </article>
   );
